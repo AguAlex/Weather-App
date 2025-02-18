@@ -11,10 +11,10 @@ def index():
     if request.method == "POST":
         user_city = request.form["city"]
 
-    weather_data = get_weather(user_city)
+    weather_data, icon_url = get_weather(user_city)
     temperature = weather_data["main"]["temp"] if weather_data else "N/A"
     
-    return render_template("index.html", city=user_city, temperature=temperature)
+    return render_template("index.html", city=user_city, temperature=temperature, icon_url=icon_url)
 
 if __name__ == "__main__":
     app.run(debug=True)

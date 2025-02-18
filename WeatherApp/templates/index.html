@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
-</head>
-<body>
-    <h2>Vremea în {{ city }}</h2>
-    <p>Temperatura: {{ temperature }} °C</p>
-    
-    <form method="post">
-        <input type="text" name="city" placeholder="Enter a city" required>
-        <button type="submit">Search</button>
+{% extends "base_layout.html" %}
+
+{% block content %}
+<div class="card shadow-lg p-4">
+    <h2 class="text-center">Location: {{ city }}</h2>
+    <p class="text-center fs-4">🌡️ Temperature: <strong>{{ temperature }}°C</strong></p>
+
+    {% if icon_url %}
+    <div class="text-center">
+        <img src="{{ icon_url }}" alt="Icon" class="img-fluid" style="max-width: 100px;">
+    </div>
+    {% endif %}
+
+    <form method="post" class="mt-4 d-flex justify-content-center">
+        <input type="text" name="city" class="form-control w-50" placeholder="Enter a city" required>
+        <button type="submit" class="btn btn-primary ms-2">🔍 Search</button>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}
