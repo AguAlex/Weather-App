@@ -64,10 +64,6 @@ python app.py
 
 Access the app in your browser at [http://127.0.0.1:5000](http://127.0.0.1:5000).
 
-## 🖼️ Screenshots
-
-![Home Page](screenshots/home.png)
-
 ## 🎨 Design
 
 Used **Bootstrap** to create a responsive and modern design, ensuring that the app looks good on any device.
