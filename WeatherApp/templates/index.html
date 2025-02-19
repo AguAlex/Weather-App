@@ -1,19 +1,50 @@
 {% extends "base_layout.html" %}
 
 {% block content %}
-<div class="card shadow-lg p-4">
-    <h2 class="text-center">Location: {{ city }}</h2>
-    <p class="text-center fs-4">🌡️ Temperature: <strong>{{ temperature }}°C</strong></p>
-
-    {% if icon_url %}
-    <div class="text-center">
-        <img src="{{ icon_url }}" alt="Icon" class="img-fluid" style="max-width: 100px;">
+<div class="d-flex justify-content-center align-items-center">
+    <label class="me-2">Show in °C</label>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="unitSwitch">
     </div>
-    {% endif %}
+    <label class="ms-2">Show in °F</label>
+</div>
+<br>
 
+<div class="card shadow-lg p-4">
     <form method="post" class="mt-4 d-flex justify-content-center">
-        <input type="text" name="city" class="form-control w-50" placeholder="Enter a city" required>
+        <input type="text" name="city" class="form-control w-50" placeholder="Search a location" required>
         <button type="submit" class="btn btn-primary ms-2">🔍 Search</button>
     </form>
+    <br>
+    <h2 class="text-center">Location: {{ city }}</h2>
+    {% if temperature != "N/A" %}
+        <p class="text-center fs-4">
+            🌡️ Temperature: <strong id="temp-value">{{ temperature }}</strong><span id="temp-unit">°C</span>
+        </p>
+    {% else %}
+    <h2 class="text-center">Invalid Location</h2>
+    {% endif %}
+
+    {% if icon_url %}
+        <div class="text-center">
+            <img src="{{ icon_url }}" alt="Icon" class="img-fluid" style="max-width: 100px;">
+        </div>
+    {% endif %}
+
+    
+</div>
+
+<div class="mt-5">
+    <h3 class="text-center">🌍 Temperatures in Major European Capitals</h3>
+    <div class="row justify-content-center">
+        {% for capital in capitals_weather %}
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 text-center mt-3">
+                    <h5>{{ capital.city }}</h5>
+                    <p>🌡️ <strong class="capital-temp">{{ capital.temperature }}</strong><span class="temp-unit">°C</span></p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
